@@ -429,6 +429,14 @@ function toggleCap()
   showHdr();
 }
 
+function baseName(str)
+{
+   var base = new String(str).substring(str.lastIndexOf('/') + 1);
+    if(base.lastIndexOf(".") != -1)
+        base = base.substring(0, base.lastIndexOf("."));
+   return base;
+}
+
 function setupHeader()
 {
   ehdr.empty();
@@ -460,8 +468,8 @@ function setupHeader()
     img.inject(el);
     el.inject(ehdr);
   }
-  if(imgs.data[eidx].date)
-    ehdr.adopt(new Element('span', { 'html': '<b>Date</b>: ' + imgs.data[eidx].date }));
+  ehdr.adopt(new Element('span', { 'html': baseName(imgs.data[eidx].img[0]) }));
+
   ehdr.setStyle('display', (ehdr.children.length? 'block': 'none'));
 }
 
